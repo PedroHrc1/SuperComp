@@ -1,0 +1,3 @@
+A tarefa levou 2.86508 segundos para ser executada
+
+1 Cpu

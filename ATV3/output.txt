@@ -1,0 +1,4 @@
+Total Words: 7
+Total Lines: 1
+Average Words Per Line: 7
+Most Frequent Word: Teste (3 times)

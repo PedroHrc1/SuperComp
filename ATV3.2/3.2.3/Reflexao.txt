@@ -1,0 +1,4 @@
+A alocação dinâmica foi mais rápida (0,003s vs. 0,007s). Um std::vector é bom porque 
+lida automaticamente com a memória, comete menos erros, é fácil de usar e ajuda a prevenir 
+problemas de memória e acessos errados. O código é mais seguro, mais confiável e mais simples de corrigir, 
+então usamos std::vector mesmo que seja um pouco mais lento.

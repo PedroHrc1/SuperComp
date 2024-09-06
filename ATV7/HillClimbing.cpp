@@ -27,24 +27,23 @@ void lerEntrada(const std::string& nomeArquivo, int& capacidade, std::vector<Ite
     arquivo.close();
 }
 
-// Função da Mochila Cheia (preenche a mochila até onde for possível)
-int mochilaCheia(int capacidade, std::vector<Item>& itens, int& pesoOcupado, std::vector<bool>& mochila) {
-    int valorTotal = 0;
-    pesoOcupado = 0;
+// Função para gerar vizinhos trocando dois itens simultaneamente
+std::vector<int> gerarVizinho(const std::vector<int>& solucao, int tam) {
+    std::vector<int> novoVizinho = solucao;
+    int pos1 = rand() % tam;
+    int pos2 = rand() % tam;
 
-    for (size_t i = 0; i < itens.size(); ++i) {
-        if (pesoOcupado + itens[i].peso <= capacidade) {
-            mochila[i] = true;  // Adiciona o item à mochila
-            pesoOcupado += itens[i].peso;
-            valorTotal += itens[i].valor;
-        }
+    // Invertemos os valores nas duas posições escolhidas
+    novoVizinho[pos1] = !novoVizinho[pos1];
+    if (pos1 != pos2) {
+        novoVizinho[pos2] = !novoVizinho[pos2];
     }
 
-    return valorTotal;
+    return novoVizinho;
 }
 
-// Função para calcular o valor e o peso da mochila com base em uma solução binária
-int calculaValorMochila(const std::vector<Item>& itens, const std::vector<bool>& mochila, int capacidade, int& pesoOcupado) {
+// Função para calcular o valor e o peso da mochila com base em uma solução
+int calculaValorMochila(const std::vector<Item>& itens, const std::vector<int>& mochila, int capacidade, int& pesoOcupado) {
     int valorTotal = 0;
     pesoOcupado = 0;
 
@@ -61,35 +60,38 @@ int calculaValorMochila(const std::vector<Item>& itens, const std::vector<bool>&
     return valorTotal;
 }
 
-// Função de Hill Climbing para a mochila
-int hillClimbingMochila(int capacidade, std::vector<Item>& itens, int& pesoOcupado, std::vector<bool>& melhorMochila) {
+// Função de Hill Climbing modificada com exploração de dois bits
+int hillClimbingDoisBits(int capacidade, std::vector<Item>& itens, int& pesoOcupado, std::vector<int>& melhorMochila, int maxIter = 1000) {
+    std::vector<int> mochila(itens.size(), 0);
+    int melhorValor = 0;
+
     // Gera uma solução inicial aleatória
-    std::vector<bool> mochila(itens.size(), false);
-    int valorAtual = mochilaCheia(capacidade, itens, pesoOcupado, mochila);
-    
+    for (size_t i = 0; i < mochila.size(); ++i) {
+        mochila[i] = rand() % 2;
+    }
+
     melhorMochila = mochila;
-    int melhorValor = valorAtual;
+    melhorValor = calculaValorMochila(itens, mochila, capacidade, pesoOcupado);
 
     bool melhorou = true;
+    int iter = 0;
 
-    while (melhorou) {
+    // Realiza o Hill Climbing
+    while (melhorou && iter < maxIter) {
         melhorou = false;
-        for (size_t i = 0; i < itens.size(); ++i) {
-            // Gera um vizinho invertendo o bit i
-            mochila[i] = !mochila[i];
-            int pesoOcupadoVizinho;
-            int valorVizinho = calculaValorMochila(itens, mochila, capacidade, pesoOcupadoVizinho);
+        ++iter;
 
-            // Se o vizinho for melhor, atualiza a melhor solução
-            if (valorVizinho > melhorValor && pesoOcupadoVizinho <= capacidade) {
-                melhorValor = valorVizinho;
-                melhorMochila = mochila;
-                pesoOcupado = pesoOcupadoVizinho;
-                melhorou = true;
-            } else {
-                // Reverte a alteração se o vizinho não for melhor
-                mochila[i] = !mochila[i];
-            }
+        // Gera um vizinho trocando dois bits aleatórios
+        std::vector<int> vizinho = gerarVizinho(melhorMochila, itens.size());
+        int pesoOcupadoVizinho;
+        int valorVizinho = calculaValorMochila(itens, vizinho, capacidade, pesoOcupadoVizinho);
+
+        // Se o vizinho for melhor, atualiza a melhor solução
+        if (valorVizinho > melhorValor && pesoOcupadoVizinho <= capacidade) {
+            melhorValor = valorVizinho;
+            melhorMochila = vizinho;
+            pesoOcupado = pesoOcupadoVizinho;
+            melhorou = true;
         }
     }
 
@@ -108,12 +110,12 @@ int main() {
         lerEntrada(nomeArquivo, capacidade, itens);
 
         // Vetor para armazenar a melhor solução
-        std::vector<bool> melhorMochila(itens.size(), false);
+        std::vector<int> melhorMochila(itens.size(), 0);
         int pesoOcupado = 0;
 
-        // Mede o tempo de execução do Hill Climbing
+        // Mede o tempo de execução do Hill Climbing modificado
         auto inicio = std::chrono::high_resolution_clock::now();
-        int melhorValor = hillClimbingMochila(capacidade, itens, pesoOcupado, melhorMochila);
+        int melhorValor = hillClimbingDoisBits(capacidade, itens, pesoOcupado, melhorMochila);
         auto fim = std::chrono::high_resolution_clock::now();
         std::chrono::duration<double> duracao = fim - inicio;
 

@@ -4,6 +4,7 @@
 #include <ctime>
 #include <cstdlib>
 #include <fstream>
+#include <chrono>
 
 using namespace std;
 
@@ -13,7 +14,7 @@ struct Item {
 };
 
 // Função para verificar se a mochila pode ser melhorada substituindo um item
-int substituicaoObjeto(int W, vector<Item>& itens) {
+pair<int, int> substituicaoObjeto(int W, vector<Item>& itens) {
     // Passo 1: Mochila cheia
     random_shuffle(itens.begin(), itens.end());
 
@@ -51,20 +52,18 @@ int substituicaoObjeto(int W, vector<Item>& itens) {
         }
     }
 
-    return valorTotal;
+    return {valorTotal, pesoOcupado};
 }
 
-int main() {
-    // Nome do arquivo de entrada
-    string filename = "entrada1.txt";
-    
+// Função para processar cada arquivo de entrada
+void processaEntrada(const string& filename) {
     // Abre o arquivo de entrada
     ifstream infile(filename);
 
     // Verifica se o arquivo foi aberto com sucesso
     if (!infile.is_open()) {
         cerr << "Erro ao abrir o arquivo: " << filename << endl;
-        return 1;
+        return;
     }
 
     int N, W;
@@ -80,11 +79,26 @@ int main() {
     // Fecha o arquivo após a leitura
     infile.close();
 
-    // Chama a função de substituição de objeto
-    int valorTotal = substituicaoObjeto(W, itens);
+    // Medir o tempo de execução
+    auto inicio = chrono::high_resolution_clock::now();
+    pair<int, int> resultado = substituicaoObjeto(W, itens); // valorTotal, pesoOcupado
+    auto fim = chrono::high_resolution_clock::now();
+    chrono::duration<double> duracao = fim - inicio;
 
     // Exibe o resultado
-    cout << "Valor alcançado com Substituição de Objeto: " << valorTotal << " dinheiros" << endl;
+    cout << "Valor alcançado com Substituição de Objeto para " << filename << ": " << resultado.first << " dinheiros" << endl;
+    cout << "Peso ocupado: " << resultado.second << " Kg" << endl;
+    cout << "Tempo de execução: " << duracao.count() << " segundos" << endl;
+}
+
+int main() {
+    // Lista de nomes dos arquivos de entrada
+    vector<string> filenames = {"../entrada1.txt", "../entrada2.txt", "../entrada3.txt"};
+
+    // Processa cada arquivo de entrada e exibe o resultado
+    for (const auto& filename : filenames) {
+        processaEntrada(filename);
+    }
 
     return 0;
 }

@@ -4,6 +4,7 @@
 #include <ctime>
 #include <cstdlib>
 #include <fstream>
+#include <chrono>
 
 using namespace std;
 
@@ -13,7 +14,7 @@ struct Item {
 };
 
 // Função para Mochila Cheia
-int mochilaCheia(int W, vector<Item>& itens) {
+pair<int, int> mochilaCheia(int W, vector<Item>& itens) {
     // Passo 1: Gera uma solução aleatória
     random_shuffle(itens.begin(), itens.end());
 
@@ -28,21 +29,19 @@ int mochilaCheia(int W, vector<Item>& itens) {
         }
     }
 
-    // Retorna o valor total alcançado
-    return valorTotal;
+    // Retorna o valor total e o peso ocupado
+    return {valorTotal, pesoOcupado};
 }
 
-int main() {
-    // Nome do arquivo de entrada
-    string filename = "entrada1.txt";
-    
+// Função para processar um arquivo de entrada
+void processaEntrada(const string& filename) {
     // Abre o arquivo de entrada
     ifstream infile(filename);
 
     // Verifica se o arquivo foi aberto com sucesso
     if (!infile.is_open()) {
         cerr << "Erro ao abrir o arquivo: " << filename << endl;
-        return 1;
+        return;
     }
 
     int N, W;
@@ -58,11 +57,26 @@ int main() {
     // Fecha o arquivo após a leitura
     infile.close();
 
-    // Chama a função de heurística
-    int valorTotal = mochilaCheia(W, itens);
+    // Medir o tempo de execução
+    auto inicio = chrono::high_resolution_clock::now();
+    pair<int, int> resultado = mochilaCheia(W, itens); // valorTotal, pesoOcupado
+    auto fim = chrono::high_resolution_clock::now();
+    chrono::duration<double> duracao = fim - inicio;
 
     // Exibe o resultado
-    cout << "Valor alcançado com Mochila Cheia: " << valorTotal << " dinheiros" << endl;
+    cout << "Valor alcançado com Mochila Cheia para " << filename << ": " << resultado.first << " dinheiros" << endl;
+    cout << "Peso ocupado: " << resultado.second << " Kg" << endl;
+    cout << "Tempo de execução: " << duracao.count() << " segundos" << endl;
+}
+
+int main() {
+    // Lista de nomes dos arquivos de entrada
+    vector<string> filenames = {"../entrada1.txt", "../entrada2.txt", "../entrada3.txt"};
+
+    // Processa cada arquivo de entrada e exibe o resultado
+    for (const auto& filename : filenames) {
+        processaEntrada(filename);
+    }
 
     return 0;
 }

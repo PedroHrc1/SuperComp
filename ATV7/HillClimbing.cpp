@@ -102,7 +102,7 @@ int main() {
     std::srand(std::time(0));  // Inicializa o gerador de números aleatórios
 
     // Vetor com os nomes dos arquivos de entrada
-    std::vector<std::string> arquivosEntrada = {"Entrada_1.txt", "Entrada_2.txt", "Entrada_3.txt", "Entrada_4.txt"};
+    std::vector<std::string> arquivosEntrada = {"../entrada1.txt", "../entrada2.txt", "../entrada3.txt"};
 
     for (const auto& nomeArquivo : arquivosEntrada) {
         int capacidade;

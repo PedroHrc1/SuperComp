@@ -1,0 +1,110 @@
+Execução 1 - Mochila Cheia
+Valor alcançado com Mochila Cheia para ../entrada1.txt: 409 dinheiros
+Peso ocupado: 371 Kg
+Tempo de execução: 2.507e-06 segundos
+Valor alcançado com Mochila Cheia para ../entrada2.txt: 473 dinheiros
+Peso ocupado: 239 Kg
+Tempo de execução: 2.63e-06 segundos
+Valor alcançado com Mochila Cheia para ../entrada3.txt: 541 dinheiros
+Peso ocupado: 596 Kg
+Tempo de execução: 1.178e-06 segundos
+---------------------
+Execução 2 - Mochila Cheia
+Valor alcançado com Mochila Cheia para ../entrada1.txt: 409 dinheiros
+Peso ocupado: 371 Kg
+Tempo de execução: 2.218e-06 segundos
+Valor alcançado com Mochila Cheia para ../entrada2.txt: 473 dinheiros
+Peso ocupado: 239 Kg
+Tempo de execução: 2.336e-06 segundos
+Valor alcançado com Mochila Cheia para ../entrada3.txt: 541 dinheiros
+Peso ocupado: 596 Kg
+Tempo de execução: 1.068e-06 segundos
+---------------------
+Execução 3 - Mochila Cheia
+Valor alcançado com Mochila Cheia para ../entrada1.txt: 409 dinheiros
+Peso ocupado: 371 Kg
+Tempo de execução: 2.384e-06 segundos
+Valor alcançado com Mochila Cheia para ../entrada2.txt: 473 dinheiros
+Peso ocupado: 239 Kg
+Tempo de execução: 2.343e-06 segundos
+Valor alcançado com Mochila Cheia para ../entrada3.txt: 541 dinheiros
+Peso ocupado: 596 Kg
+Tempo de execução: 1.09e-06 segundos
+---------------------
+Execução 4 - Mochila Cheia
+Valor alcançado com Mochila Cheia para ../entrada1.txt: 409 dinheiros
+Peso ocupado: 371 Kg
+Tempo de execução: 2.665e-06 segundos
+Valor alcançado com Mochila Cheia para ../entrada2.txt: 473 dinheiros
+Peso ocupado: 239 Kg
+Tempo de execução: 2.464e-06 segundos
+Valor alcançado com Mochila Cheia para ../entrada3.txt: 541 dinheiros
+Peso ocupado: 596 Kg
+Tempo de execução: 1.116e-06 segundos
+---------------------
+Execução 5 - Mochila Cheia
+Valor alcançado com Mochila Cheia para ../entrada1.txt: 409 dinheiros
+Peso ocupado: 371 Kg
+Tempo de execução: 2.28e-06 segundos
+Valor alcançado com Mochila Cheia para ../entrada2.txt: 473 dinheiros
+Peso ocupado: 239 Kg
+Tempo de execução: 2.468e-06 segundos
+Valor alcançado com Mochila Cheia para ../entrada3.txt: 541 dinheiros
+Peso ocupado: 596 Kg
+Tempo de execução: 1.1e-06 segundos
+---------------------
+Execução 6 - Mochila Cheia
+Valor alcançado com Mochila Cheia para ../entrada1.txt: 409 dinheiros
+Peso ocupado: 371 Kg
+Tempo de execução: 2.431e-06 segundos
+Valor alcançado com Mochila Cheia para ../entrada2.txt: 473 dinheiros
+Peso ocupado: 239 Kg
+Tempo de execução: 2.529e-06 segundos
+Valor alcançado com Mochila Cheia para ../entrada3.txt: 541 dinheiros
+Peso ocupado: 596 Kg
+Tempo de execução: 1.065e-06 segundos
+---------------------
+Execução 7 - Mochila Cheia
+Valor alcançado com Mochila Cheia para ../entrada1.txt: 409 dinheiros
+Peso ocupado: 371 Kg
+Tempo de execução: 2.344e-06 segundos
+Valor alcançado com Mochila Cheia para ../entrada2.txt: 473 dinheiros
+Peso ocupado: 239 Kg
+Tempo de execução: 2.759e-06 segundos
+Valor alcançado com Mochila Cheia para ../entrada3.txt: 541 dinheiros
+Peso ocupado: 596 Kg
+Tempo de execução: 1.12e-06 segundos
+---------------------
+Execução 8 - Mochila Cheia
+Valor alcançado com Mochila Cheia para ../entrada1.txt: 409 dinheiros
+Peso ocupado: 371 Kg
+Tempo de execução: 2.208e-06 segundos
+Valor alcançado com Mochila Cheia para ../entrada2.txt: 473 dinheiros
+Peso ocupado: 239 Kg
+Tempo de execução: 2.316e-06 segundos
+Valor alcançado com Mochila Cheia para ../entrada3.txt: 541 dinheiros
+Peso ocupado: 596 Kg
+Tempo de execução: 1.12e-06 segundos
+---------------------
+Execução 9 - Mochila Cheia
+Valor alcançado com Mochila Cheia para ../entrada1.txt: 409 dinheiros
+Peso ocupado: 371 Kg
+Tempo de execução: 2.195e-06 segundos
+Valor alcançado com Mochila Cheia para ../entrada2.txt: 473 dinheiros
+Peso ocupado: 239 Kg
+Tempo de execução: 2.509e-06 segundos
+Valor alcançado com Mochila Cheia para ../entrada3.txt: 541 dinheiros
+Peso ocupado: 596 Kg
+Tempo de execução: 1.102e-06 segundos
+---------------------
+Execução 10 - Mochila Cheia
+Valor alcançado com Mochila Cheia para ../entrada1.txt: 409 dinheiros
+Peso ocupado: 371 Kg
+Tempo de execução: 2.292e-06 segundos
+Valor alcançado com Mochila Cheia para ../entrada2.txt: 473 dinheiros
+Peso ocupado: 239 Kg
+Tempo de execução: 2.495e-06 segundos
+Valor alcançado com Mochila Cheia para ../entrada3.txt: 541 dinheiros
+Peso ocupado: 596 Kg
+Tempo de execução: 1.121e-06 segundos
+---------------------

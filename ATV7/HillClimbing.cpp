@@ -1,91 +1,129 @@
 #include <iostream>
 #include <vector>
-#include <algorithm>
-#include <ctime>
-#include <cstdlib>
 #include <fstream>
+#include <cstdlib>
+#include <ctime>
+#include <chrono>
 
-using namespace std;
-
+// Estrutura para armazenar peso e valor de um item
 struct Item {
     int peso;
     int valor;
 };
 
-// Gera um vizinho modificando um bit
-vector<bool> gerarVizinho(const vector<bool>& solucao) {
-    vector<bool> vizinho = solucao;
-    int pos = rand() % solucao.size(); // Escolhe uma posição aleatória para trocar o bit
-    vizinho[pos] = !vizinho[pos];
-    return vizinho;
+// Função para ler os dados dos arquivos de entrada
+void lerEntrada(const std::string& nomeArquivo, int& capacidade, std::vector<Item>& itens) {
+    std::ifstream arquivo(nomeArquivo);
+    if (!arquivo) {
+        std::cerr << "Erro ao abrir o arquivo " << nomeArquivo << std::endl;
+        exit(1);
+    }
+    int n;
+    arquivo >> n >> capacidade;
+    itens.resize(n);
+    for (int i = 0; i < n; ++i) {
+        arquivo >> itens[i].peso >> itens[i].valor;
+    }
+    arquivo.close();
 }
 
-// Função de Hill Climbing para o problema da mochila
-int hillClimbingKnapsack(int W, const vector<Item>& itens) {
-    // Gera uma solução inicial aleatória (string binária)
-    vector<bool> solucao(itens.size(), false);
-    int pesoOcupado = 0, valorTotal = 0;
+// Função da Mochila Cheia (preenche a mochila até onde for possível)
+int mochilaCheia(int capacidade, std::vector<Item>& itens, int& pesoOcupado, std::vector<bool>& mochila) {
+    int valorTotal = 0;
+    pesoOcupado = 0;
 
-    // Iniciar com uma solução válida (vazia)
-    bool melhorou = true;
-    while (melhorou) {
-        melhorou = false;
-        for (int i = 0; i < 10; i++) { // Gerar 10 vizinhos
-            vector<bool> vizinho = gerarVizinho(solucao);
-
-            // Calcula o peso e o valor do vizinho
-            int pesoVizinho = 0, valorVizinho = 0;
-            for (size_t j = 0; j < vizinho.size(); j++) {
-                if (vizinho[j]) {
-                    pesoVizinho += itens[j].peso;
-                    valorVizinho += itens[j].valor;
-                }
-            }
-
-            // Se o vizinho for melhor, adote-o como nova solução
-            if (pesoVizinho <= W && valorVizinho > valorTotal) {
-                solucao = vizinho;
-                pesoOcupado = pesoVizinho;
-                valorTotal = valorVizinho;
-                melhorou = true;
-            }
+    for (size_t i = 0; i < itens.size(); ++i) {
+        if (pesoOcupado + itens[i].peso <= capacidade) {
+            mochila[i] = true;  // Adiciona o item à mochila
+            pesoOcupado += itens[i].peso;
+            valorTotal += itens[i].valor;
         }
     }
 
     return valorTotal;
 }
 
-int main() {
-    // Nome do arquivo de entrada
-    string filename = "entrada1.txt";
+// Função para calcular o valor e o peso da mochila com base em uma solução binária
+int calculaValorMochila(const std::vector<Item>& itens, const std::vector<bool>& mochila, int capacidade, int& pesoOcupado) {
+    int valorTotal = 0;
+    pesoOcupado = 0;
+
+    for (size_t i = 0; i < itens.size(); ++i) {
+        if (mochila[i]) {
+            pesoOcupado += itens[i].peso;
+            if (pesoOcupado > capacidade) {
+                return 0;  // Se ultrapassar a capacidade, retorna 0
+            }
+            valorTotal += itens[i].valor;
+        }
+    }
+
+    return valorTotal;
+}
+
+// Função de Hill Climbing para a mochila
+int hillClimbingMochila(int capacidade, std::vector<Item>& itens, int& pesoOcupado, std::vector<bool>& melhorMochila) {
+    // Gera uma solução inicial aleatória
+    std::vector<bool> mochila(itens.size(), false);
+    int valorAtual = mochilaCheia(capacidade, itens, pesoOcupado, mochila);
     
-    // Abre o arquivo de entrada
-    ifstream infile(filename);
+    melhorMochila = mochila;
+    int melhorValor = valorAtual;
 
-    // Verifica se o arquivo foi aberto com sucesso
-    if (!infile.is_open()) {
-        cerr << "Erro ao abrir o arquivo: " << filename << endl;
-        return 1;
+    bool melhorou = true;
+
+    while (melhorou) {
+        melhorou = false;
+        for (size_t i = 0; i < itens.size(); ++i) {
+            // Gera um vizinho invertendo o bit i
+            mochila[i] = !mochila[i];
+            int pesoOcupadoVizinho;
+            int valorVizinho = calculaValorMochila(itens, mochila, capacidade, pesoOcupadoVizinho);
+
+            // Se o vizinho for melhor, atualiza a melhor solução
+            if (valorVizinho > melhorValor && pesoOcupadoVizinho <= capacidade) {
+                melhorValor = valorVizinho;
+                melhorMochila = mochila;
+                pesoOcupado = pesoOcupadoVizinho;
+                melhorou = true;
+            } else {
+                // Reverte a alteração se o vizinho não for melhor
+                mochila[i] = !mochila[i];
+            }
+        }
     }
 
-    int N, W;
-    infile >> N >> W;
+    return melhorValor;
+}
 
-    vector<Item> itens(N);
+int main() {
+    std::srand(std::time(0));  // Inicializa o gerador de números aleatórios
 
-    // Leitura dos pesos e valores do arquivo
-    for (int i = 0; i < N; i++) {
-        infile >> itens[i].peso >> itens[i].valor;
+    // Vetor com os nomes dos arquivos de entrada
+    std::vector<std::string> arquivosEntrada = {"Entrada_1.txt", "Entrada_2.txt", "Entrada_3.txt", "Entrada_4.txt"};
+
+    for (const auto& nomeArquivo : arquivosEntrada) {
+        int capacidade;
+        std::vector<Item> itens;
+        lerEntrada(nomeArquivo, capacidade, itens);
+
+        // Vetor para armazenar a melhor solução
+        std::vector<bool> melhorMochila(itens.size(), false);
+        int pesoOcupado = 0;
+
+        // Mede o tempo de execução do Hill Climbing
+        auto inicio = std::chrono::high_resolution_clock::now();
+        int melhorValor = hillClimbingMochila(capacidade, itens, pesoOcupado, melhorMochila);
+        auto fim = std::chrono::high_resolution_clock::now();
+        std::chrono::duration<double> duracao = fim - inicio;
+
+        // Saída dos resultados
+        std::cout << "Arquivo: " << nomeArquivo << std::endl;
+        std::cout << "Peso ocupado: " << pesoOcupado << " Kg" << std::endl;
+        std::cout << "Valor máximo na mochila: " << melhorValor << " dinheiros" << std::endl;
+        std::cout << "Tempo de execução: " << duracao.count() << " segundos" << std::endl;
+        std::cout << "---------------------------" << std::endl;
     }
-
-    // Fecha o arquivo após a leitura
-    infile.close();
-
-    // Chama a função de Hill Climbing
-    int valorTotal = hillClimbingKnapsack(W, itens);
-
-    // Exibe o resultado
-    cout << "Valor alcançado com Hill Climbing: " << valorTotal << " dinheiros" << endl;
 
     return 0;
 }

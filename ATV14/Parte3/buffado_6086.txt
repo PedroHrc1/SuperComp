@@ -1,0 +1,8 @@
+Valor estimado de pi: 3.14188
+Tempo de execução: 0.0116505 segundos
+Valor estimado de pi: 3.14188
+Tempo de execução: 0.011672 segundos
+Valor estimado de pi: 3.14188
+Tempo de execução: 0.0116248 segundos
+Valor estimado de pi: 3.14188
+Tempo de execução: 0.0117818 segundos

@@ -1,0 +1,4 @@
+Processo 1 recebeu: 'Mensagem do Processo 0' do Processo 0
+Processo 2 recebeu: 'Mensagem do Processo 1' do Processo 1
+Processo 0 recebeu: 'Mensagem do Processo 3' do Processo 3
+Processo 3 recebeu: 'Mensagem do Processo 2' do Processo 2

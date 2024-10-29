@@ -1,0 +1,11 @@
+Processo 0 inicia a soma com valor: 1
+Processo 0 enviou a soma 1 para o Processo 1
+Processo 1 recebeu a soma 1 do Processo 0
+Processo 1 adicionou seu valor 2. Soma atualizada: 3
+Processo 1 enviou a soma 3 para o Processo 2
+Processo 2 recebeu a soma 3 do Processo 1
+Processo 2 adicionou seu valor 3. Soma atualizada: 6
+Processo 2 enviou a soma 6 para o Processo 3
+Processo 3 recebeu a soma 6 do Processo 2
+Processo 3 adicionou seu valor 4. Soma atualizada: 10
+Processo 3 é o último processo. Soma total: 10

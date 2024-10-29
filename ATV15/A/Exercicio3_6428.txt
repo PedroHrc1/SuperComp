@@ -1,0 +1,6 @@
+Processo 0 enviou: 'Olá, este é o processo 0 iniciando a difusão!' para o Processo 1
+Processo 1 recebeu: 'Olá, este é o processo 0 iniciando a difusão!' do Processo 0
+Processo 1 enviou: 'Olá, este é o processo 0 iniciando a difusão! [Modificada pelo processo 1]' para o Processo 2
+Processo 2 recebeu: 'Olá, este é o processo 0 iniciando a difusão! [Modificada pelo processo 1]' do Processo 1
+Processo 2 enviou: 'Olá, este é o processo 0 iniciando a difusão! [Modificada pelo processo 1] [Modificada pelo processo 2]' para o Processo 3
+Processo 3 recebeu: 'Olá, este é o processo 0 iniciando a difusão! [Modificada pelo processo 1] [Modificada pelo processo 2]' do Processo 2

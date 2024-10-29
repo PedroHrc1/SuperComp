@@ -1,0 +1,5 @@
+Processo 0 (Raiz) definiu o número de iterações: 100000000
+Processo 1: Soma = 5000000050000000, Média Local = 50000000.50, Tempo de Execução = 0.1460 segundos
+Processo 3: Soma = 5000000050000000, Média Local = 50000000.50, Tempo de Execução = 0.1477 segundos
+Processo 2: Soma = 5000000050000000, Média Local = 50000000.50, Tempo de Execução = 0.1480 segundos
+Processo 0: Soma = 5000000050000000, Média Local = 50000000.50, Tempo de Execução = 0.1483 segundos

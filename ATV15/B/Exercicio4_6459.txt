@@ -1,0 +1,16 @@
+
+Médias Locais Coletadas:
+Processo 0: 499.81
+Processo 1: 499.86
+Processo 2: 499.61
+Processo 3: 500.82
+
+Variâncias Locais Coletadas:
+Processo 0: 83377.13
+Processo 1: 83354.60
+Processo 2: 83461.76
+Processo 3: 83384.96
+
+Média Global: 500.02
+Variância Global: 83394.83
+Desvio Padrão Global: 288.78

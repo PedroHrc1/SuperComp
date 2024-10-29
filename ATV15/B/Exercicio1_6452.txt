@@ -1,0 +1,24 @@
+Processo 0 inicializou o array:
+90 44 18 73 43 26 52 10 79 65 
+93 92 30 69 27 67 65 59 53 27 
+38 37 22 6 5 37 70 4 21 72 
+86 11 16 4 36 12 30 89 74 61 
+54 68 53 36 89 33 3 55 44 9 
+34 83 46 56 41 51 46 11 55 67 
+83 93 79 51 97 67 15 80 8 90 
+41 63 10 47 51 99 80 55 54 24 
+64 88 59 62 97 52 14 95 63 21 
+62 98 15 93 2 64 61 69 44 69 
+
+Processo 0: Soma local = 1190.00, Média local = 47.60
+
+Médias locais coletadas:
+Processo 0: 47.60
+Processo 1: 42.68
+Processo 2: 54.60
+Processo 3: 60.16
+
+Média global de todos os processos: 51.26
+Processo 2: Soma local = 1365.00, Média local = 54.60
+Processo 1: Soma local = 1067.00, Média local = 42.68
+Processo 3: Soma local = 1504.00, Média local = 60.16

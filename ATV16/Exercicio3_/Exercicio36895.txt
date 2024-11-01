@@ -1,0 +1,1 @@
+A média dos elementos do vetor é: 43.600000

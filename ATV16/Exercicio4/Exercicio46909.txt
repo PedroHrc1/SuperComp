@@ -1,0 +1,2 @@
+Valor 42 encontrado nas posições:
+50 99 
